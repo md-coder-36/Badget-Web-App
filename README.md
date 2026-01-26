@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Budget Management App
+
+A modern, comprehensive budget management application built with Next.js 14, Ant Design, and Neon (PostgreSQL).
+
+## Features
+
+- **Dashboard**: Real-time overview of your financial health with interactive charts.
+- **Income & Expense Tracking**: Easy logging and management of transactions.
+- **Budgeting**: (Planned) Set limits for categories.
+- **Analytics**: Detailed breakdown of spending habits, trend analysis, and reports.
+- **Authentication**: Secure user accounts using NextAuth.js.
+- **Responsive Design**: Works on Desktop, Tablet, and Mobile.
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **UI Component Library**: [Ant Design](https://ant.design/)
+- **Charts**: [@ant-design/charts](https://charts.ant.design/)
+- **Database**: [PostgreSQL (Neon)](https://neon.tech/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Styling**: Tailwind CSS & Ant Design Tokens
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v18+)
+- PostgreSQL Database URL (Neon or local)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/budget-app.git
+    cd budget-app
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3.  Set up Environment Variables:
+    Create a `.env` file in the root directory:
+    ```env
+    DATABASE_URL="postgres://user:pass@host:port/db"
+    NEXTAUTH_SECRET="your-secret-key"
+    NEXTAUTH_URL="http://localhost:3000"
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4.  Run Database Migrations:
+    ```bash
+    npx prisma migrate dev
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5.  Run the Development Server:
+    ```bash
+    npm run dev
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/`: Next.js App Router pages and API routes.
+- `components/`: Reusable UI components (forms, charts, layout).
+- `lib/`: Utility functions (DB connection, auth).
+- `prisma/`: Database schema.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+This app is ready to be deployed on [Vercel](https://vercel.com).
+
+1.  Push your code to GitHub.
+2.  Import the project in Vercel.
+3.  Add the Environment Variables (`DATABASE_URL`, `NEXTAUTH_SECRET`, etc.).
+4.  Deploy!
+
+## License
+
+MIT

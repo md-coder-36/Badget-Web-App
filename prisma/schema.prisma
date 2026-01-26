@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  categories   Category[]
+  incomes      Income[]
+  expenses     Expense[]
+}
+
+// Category Model (for both income and expenses)
+model Category {
+  id            String        @id @default(cuid())
+  name          String
+  type          String        // "income" or "expense"
+  color         String?       // Hex color for UI
+  icon          String?       // Icon identifier
+  isDefault     Boolean       @default(false)
+  userId        String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subcategories Subcategory[]
+  incomes       Income[]
+  expenses      Expense[]
+  
+  @@unique([userId, name, type])
+}
+
+// Subcategory Model
+model Subcategory {
+  id         String    @id @default(cuid())
+  name       String
+  categoryId String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  incomes    Income[]
+  expenses   Expense[]
+  
+  @@unique([categoryId, name])
+}
+
+// Income Model
+model Income {
+  id            String       @id @default(cuid())
+  name          String
+  amount        Decimal      @db.Decimal(10, 2)
+  date          DateTime
+  frequency     String       // "one-time", "weekly", "bi-weekly", "monthly", "yearly"
+  notes         String?
+  categoryId    String
+  subcategoryId String?
+  userId        String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category      Category     @relation(fields: [categoryId], references: [id])
+  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id])
+  
+  @@index([userId, date])
+}
+
+// Expense Model
+model Expense {
+  id            String       @id @default(cuid())
+  name          String
+  amount        Decimal      @db.Decimal(10, 2)
+  date          DateTime
+  paymentMethod String?      // "cash", "credit", "debit", etc.
+  notes         String?
+  categoryId    String
+  subcategoryId String?
+  userId        String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category      Category     @relation(fields: [categoryId], references: [id])
+  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id])
+  
+  @@index([userId, date])
+}
