@@ -54,7 +54,6 @@ export default function Sidebar({ collapsed, setCollapsed, mobile, onClose }) {
     return (
         <Sider
             trigger={null}
-            collapsible
             collapsed={collapsed}
             breakpoint="lg"
             collapsedWidth={mobile ? 0 : 80}

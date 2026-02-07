@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button, Card, Table, Tag, Space, Typography, Tooltip, message, Popconfirm, Statistic, Row, Col, DatePicker, Select } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Button, Card, Table, Tag, Space, Typography, Tooltip, message, Popconfirm, Statistic, Row, Col, DatePicker, Select, Modal } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, EyeOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import ExpenseForm from '@/components/forms/ExpenseForm';
 
@@ -23,6 +23,10 @@ export default function ExpensesPage() {
     // Modal State
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
+
+    // Note View State
+    const [noteModalVisible, setNoteModalVisible] = useState(false);
+    const [selectedNote, setSelectedNote] = useState('');
 
     const [formLoading, setFormLoading] = useState(false);
 
@@ -189,6 +193,17 @@ export default function ExpensesPage() {
             key: 'actions',
             render: (_, record) => (
                 <Space>
+                    <Tooltip title="View Notes">
+                        <Button
+                            type="text"
+                            icon={<EyeOutlined />}
+                            size="small"
+                            onClick={() => {
+                                setSelectedNote(record.notes || 'No notes available.');
+                                setNoteModalVisible(true);
+                            }}
+                        />
+                    </Tooltip>
                     <Tooltip title="Edit">
                         <Button
                             type="text"
@@ -293,6 +308,19 @@ export default function ExpensesPage() {
                 }}
                 onCreate={editingItem ? handleUpdate : handleCreate}
             />
+
+            <Modal
+                title="Notes"
+                open={noteModalVisible}
+                onCancel={() => setNoteModalVisible(false)}
+                footer={[
+                    <Button key="close" onClick={() => setNoteModalVisible(false)}>
+                        Close
+                    </Button>
+                ]}
+            >
+                <p>{selectedNote}</p>
+            </Modal>
         </div>
     );
 }

@@ -16,11 +16,10 @@ export default function DashboardLayout({ children }) {
     const isMobile = !screens.md;
 
     return (
-        <Layout className="min-h-screen h-screen">
+        <Layout className="min-h-screen h-full">
             {!isMobile && (
                 <Sidebar
-                    collapsed={collapsed}
-                    setCollapsed={setCollapsed}
+                    collapsed={true}
                     mobile={false}
                 />
             )}
@@ -46,7 +45,7 @@ export default function DashboardLayout({ children }) {
             <Layout
                 className="site-layout transition-all duration-200 ease-in-out"
                 style={{
-                    marginLeft: !isMobile ? (collapsed ? 80 : 250) : 0
+                    marginLeft: !isMobile ? 80 : 0
                 }}
             >
                 <Header

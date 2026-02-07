@@ -63,16 +63,18 @@ export default function Header({ collapsed, setCollapsed, mobile }) {
             style={{ paddingLeft: 16, paddingRight: 24, }}
         >
             <div className="flex items-center">
-                <Button
-                    type="text"
-                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                    onClick={() => setCollapsed(!collapsed)}
-                    style={{
-                        fontSize: '20px',
-                        width: 50,
-                        height: 50,
-                    }}
-                />
+                {mobile && (
+                    <Button
+                        type="text"
+                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        onClick={() => setCollapsed(!collapsed)}
+                        style={{
+                            fontSize: '20px',
+                            width: 50,
+                            height: 50,
+                        }}
+                    />
+                )}
                 {mobile && (
                     <Text strong className="text-lg ml-2">
                         Budget App
