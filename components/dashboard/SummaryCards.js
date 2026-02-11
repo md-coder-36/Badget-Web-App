@@ -50,7 +50,7 @@ export default function SummaryCards({ period, refreshTrigger }) {
                         valueStyle={{ color: '#3f8600' }}
                         prefix="₹"
                         suffix={<ArrowUpOutlined />}
-                        formatter={val => `₹ ${new Intl.NumberFormat('en-IN').format(val)}`}
+                        formatter={val => new Intl.NumberFormat('en-IN').format(val)}
                     />
                 </Card>
             </Col>
@@ -63,7 +63,7 @@ export default function SummaryCards({ period, refreshTrigger }) {
                         valueStyle={{ color: '#cf1322' }}
                         prefix="₹"
                         suffix={<ArrowDownOutlined />}
-                        formatter={val => `₹ ${new Intl.NumberFormat('en-IN').format(val)}`}
+                        formatter={val => new Intl.NumberFormat('en-IN').format(val)}
                     />
                 </Card>
             </Col>
@@ -74,9 +74,8 @@ export default function SummaryCards({ period, refreshTrigger }) {
                         value={data.netBalance}
                         precision={2}
                         valueStyle={{ color: data.netBalance >= 0 ? '#3f8600' : '#cf1322' }}
-                        prefix="₹"
                         suffix={<WalletOutlined />}
-                        formatter={val => `₹ ${new Intl.NumberFormat('en-IN').format(val)}`}
+                        formatter={val => `₹ ${new Intl.NumberFormat('en-IN').format(val)} `}
                     />
                 </Card>
             </Col>

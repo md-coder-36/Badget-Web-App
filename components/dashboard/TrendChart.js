@@ -46,13 +46,14 @@ export default function TrendChart({ period, refreshTrigger }) {
         //     return type === 'Income' ? '#3f8600' : '#cf1322';
         // },
         marginRatio: 0.1,
-        tooltip: {
-            formatter: (datum) => {
-                return { name: datum.type, value: `₹ ${new Intl.NumberFormat('en-IN').format(datum.value)}` };
+        colorField: "type",
+        style: {
+            fill: ({ type }) => {
+                return type === 'Income' ? '#2af1cdff' : '#ff3964ff';
             },
         },
         legend: {
-            position: 'top-left',
+            color: false,
         },
         xAxis: {
             label: {
@@ -80,7 +81,8 @@ export default function TrendChart({ period, refreshTrigger }) {
             title: {
                 text: 'Amount (₹)',
                 style: { fontSize: 12 }
-            }
+            },
+            // interaction: { tooltip: { shared: true } },
         }
     };
 

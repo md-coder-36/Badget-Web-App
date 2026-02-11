@@ -51,7 +51,7 @@ export default function CategoryPieChart({ type, period, refreshTrigger }) {
                     fontWeight: 'bold',
                     fill: '#000',
                 },
-                position: 'spider',
+                position: 'outside',
             },
             {
                 text: ({ weight }) => {

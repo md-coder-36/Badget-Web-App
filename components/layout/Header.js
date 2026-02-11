@@ -4,9 +4,7 @@ import { Layout, Button, Avatar, Dropdown, Space, Typography } from 'antd';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UserOutlined,
     LogoutOutlined,
-    SettingOutlined,
 } from '@ant-design/icons';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -31,19 +29,6 @@ export default function Header({ collapsed, setCollapsed, mobile }) {
                 </div>
             ),
             disabled: true,
-        },
-        {
-            type: 'divider',
-        },
-        {
-            key: 'profile',
-            icon: <UserOutlined />,
-            label: 'Profile',
-        },
-        {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: 'Settings',
         },
         {
             type: 'divider',
